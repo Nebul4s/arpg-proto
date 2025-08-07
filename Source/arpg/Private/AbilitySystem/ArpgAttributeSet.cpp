@@ -2,11 +2,14 @@
 
 
 #include "AbilitySystem/ArpgAttributeSet.h"
-#include "AbilitySystemComponent.h"
 #include "Net/UnrealNetwork.h"
 
 UArpgAttributeSet::UArpgAttributeSet()
 {
+	InitLife(100.f);
+	InitMaxLife(100.f);
+	InitMana(50.f);
+	InitMaxMana(50.f);
 }
 
 void UArpgAttributeSet::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const

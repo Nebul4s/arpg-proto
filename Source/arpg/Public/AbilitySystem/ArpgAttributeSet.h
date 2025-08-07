@@ -4,7 +4,15 @@
 
 #include "CoreMinimal.h"
 #include "AttributeSet.h"
+#include "AbilitySystemComponent.h"
 #include "ArpgAttributeSet.generated.h"
+
+
+#define ATTRIBUTE_ACCESSORS(ClassName, PropertyName) \
+	GAMEPLAYATTRIBUTE_PROPERTY_GETTER(ClassName, PropertyName) \
+	GAMEPLAYATTRIBUTE_VALUE_GETTER(PropertyName) \
+	GAMEPLAYATTRIBUTE_VALUE_SETTER(PropertyName) \
+	GAMEPLAYATTRIBUTE_VALUE_INITTER(PropertyName)
 
 /**
  * 
@@ -20,12 +28,19 @@ public:
 	//Resource Attributes Start
 	UPROPERTY(BlueprintReadOnly, ReplicatedUsing=OnRep_Life, Category="Resource Attributes")
 	FGameplayAttributeData Life;
+	ATTRIBUTE_ACCESSORS(UArpgAttributeSet, Life);
+	
 	UPROPERTY(BlueprintReadOnly, ReplicatedUsing=OnRep_MaxLife, Category="Resource Attributes")
 	FGameplayAttributeData MaxLife;
+	ATTRIBUTE_ACCESSORS(UArpgAttributeSet, MaxLife);
+	
 	UPROPERTY(BlueprintReadOnly, ReplicatedUsing=OnRep_Mana, Category="Resource Attributes")
 	FGameplayAttributeData Mana;
+	ATTRIBUTE_ACCESSORS(UArpgAttributeSet, Mana);
+	
 	UPROPERTY(BlueprintReadOnly, ReplicatedUsing=OnRep_MaxMana, Category="Resource Attributes")
 	FGameplayAttributeData MaxMana;
+	ATTRIBUTE_ACCESSORS(UArpgAttributeSet, MaxMana);
 
 	UFUNCTION()
 	void OnRep_Life(const FGameplayAttributeData& OldLife) const;
