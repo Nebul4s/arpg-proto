@@ -6,6 +6,8 @@
 #include "GameFramework/PlayerController.h"
 #include "ArpgPlayerController.generated.h"
 
+class UInputMappingContext;
+class UInputAction;
 /**
  * 
  */
@@ -13,5 +15,19 @@ UCLASS()
 class ARPG_API AArpgPlayerController : public APlayerController
 {
 	GENERATED_BODY()
-	
+public:
+	AArpgPlayerController();
+
+protected:
+	virtual void BeginPlay() override;
+	virtual void SetupInputComponent() override;
+
+private:
+	UPROPERTY(EditAnywhere, Category="Input")
+	TObjectPtr<UInputMappingContext> ArpgContext;
+
+	UPROPERTY(EditAnywhere, Category="Input")
+	TObjectPtr<UInputAction> MoveAction;
+
+	void Move(const struct FInputActionValue& InputActionValue);
 };
