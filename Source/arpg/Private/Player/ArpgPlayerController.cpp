@@ -4,11 +4,37 @@
 #include "Player/ArpgPlayerController.h"
 #include "EnhancedInputSubsystems.h"
 #include "EnhancedInputComponent.h"
+#include "Interaction/EnemyInterface.h"
 
 AArpgPlayerController::AArpgPlayerController()
 {
 	bReplicates = true;
 }
+
+void AArpgPlayerController::PlayerTick(float DeltaTime)
+{
+	Super::PlayerTick(DeltaTime);
+
+	CursorTrace();
+	
+}
+
+void AArpgPlayerController::CursorTrace()
+{
+	FHitResult CursorHit;
+	GetHitResultUnderCursor(ECC_Visibility, false, CursorHit);
+	if (!CursorHit.bBlockingHit) return;
+	
+	LastActor = CurrentActor;
+	CurrentActor = CursorHit.GetActor();
+
+	if (LastActor != CurrentActor)
+	{
+		if (LastActor) LastActor->UnHighlightActor();
+		if (CurrentActor) CurrentActor->HighlightActor();
+	}
+}
+
 
 void AArpgPlayerController::BeginPlay()
 {
@@ -53,3 +79,4 @@ void AArpgPlayerController::Move(const struct FInputActionValue& InputActionValu
 		ControlledPawn->AddMovementInput(RightDirection, InputAxisVector.X);
 	}
 }
+

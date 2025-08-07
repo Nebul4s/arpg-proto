@@ -8,6 +8,7 @@
 
 class UInputMappingContext;
 class UInputAction;
+class IEnemyInterface;
 /**
  * 
  */
@@ -17,7 +18,7 @@ class ARPG_API AArpgPlayerController : public APlayerController
 	GENERATED_BODY()
 public:
 	AArpgPlayerController();
-
+	virtual void PlayerTick(float DeltaTime) override;
 protected:
 	virtual void BeginPlay() override;
 	virtual void SetupInputComponent() override;
@@ -30,4 +31,8 @@ private:
 	TObjectPtr<UInputAction> MoveAction;
 
 	void Move(const struct FInputActionValue& InputActionValue);
+
+	void CursorTrace();
+	TScriptInterface<IEnemyInterface> LastActor;
+	TScriptInterface<IEnemyInterface> CurrentActor;
 };
