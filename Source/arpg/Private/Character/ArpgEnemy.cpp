@@ -3,12 +3,19 @@
 
 #include "Character/ArpgEnemy.h"
 
+#include "AbilitySystem/ArpgAbilitySystemComponent.h"
+#include "AbilitySystem/ArpgAttributeSet.h"
 #include "arpg/arpg.h"
 
 
 AArpgEnemy::AArpgEnemy()
 {
 	GetMesh()->SetCollisionResponseToChannel(ECC_Visibility, ECR_Block);
+
+	AbilitySystemComponent = CreateDefaultSubobject<UArpgAbilitySystemComponent>("AbilitySystemComponent");
+	AbilitySystemComponent->SetIsReplicated(true);
+
+	AttributeSet = CreateDefaultSubobject<UArpgAttributeSet>("AttributeSet");
 }
 
 void AArpgEnemy::HighlightActor()

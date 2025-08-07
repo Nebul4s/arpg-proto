@@ -13,9 +13,15 @@ AArpgCharacterBase::AArpgCharacterBase()
 
 }
 
+UAbilitySystemComponent* AArpgCharacterBase::GetAbilitySystemComponent() const
+{
+	return AbilitySystemComponent;
+}
+
 void AArpgCharacterBase::BeginPlay()
 {
 	Super::BeginPlay();
+
 	
 }
 
