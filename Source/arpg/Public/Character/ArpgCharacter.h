@@ -15,4 +15,8 @@ class ARPG_API AArpgCharacter : public AArpgCharacterBase
 	GENERATED_BODY()
 public:
 	AArpgCharacter();
+	virtual void PossessedBy(AController* NewController) override;
+	virtual void OnRep_PlayerState() override;
+private:
+	void InitAbilityActorInfo();
 };

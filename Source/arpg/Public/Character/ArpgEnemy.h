@@ -16,6 +16,10 @@ class ARPG_API AArpgEnemy : public AArpgCharacterBase, public IEnemyInterface
 	GENERATED_BODY()
 public:
 	AArpgEnemy();
+	
 	virtual void HighlightActor() override;
 	virtual void UnHighlightActor() override;
+
+protected:
+	virtual void BeginPlay() override;
 };
