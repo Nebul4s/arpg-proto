@@ -22,6 +22,20 @@ void UArpgAttributeSet::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& Ou
 	DOREPLIFETIME_CONDITION_NOTIFY(UArpgAttributeSet, MaxMana, COND_None, REPNOTIFY_Always);
 }
 
+void UArpgAttributeSet::PreAttributeChange(const FGameplayAttribute& Attribute, float& NewValue)
+{
+	Super::PreAttributeChange(Attribute, NewValue);
+
+	if (Attribute == GetLifeAttribute())
+	{
+		NewValue = FMath::Clamp(NewValue, 0.f, GetMaxLife());
+	}
+	if (Attribute == GetManaAttribute())
+	{
+		NewValue = FMath::Clamp(NewValue, 0.f, GetMaxMana());
+	}
+}
+
 void UArpgAttributeSet::OnRep_Life(const FGameplayAttributeData& OldLife) const
 {
 	GAMEPLAYATTRIBUTE_REPNOTIFY(UArpgAttributeSet, Life, OldLife)
