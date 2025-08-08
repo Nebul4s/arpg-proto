@@ -3,3 +3,10 @@
 
 #include "UI/WidgetController/ArpgWidgetController.h"
 
+void UArpgWidgetController::SetWidgetControllerParams(const FWidgetControllerParams& WidgetControllerParams)
+{
+	PlayerController = WidgetControllerParams.PlayerController;
+	PlayerState = WidgetControllerParams.PlayerState;
+	AbilitySystemComponent = WidgetControllerParams.AbilitySystemComponent;
+	AttributeSet = WidgetControllerParams.AttributeSet;
+}

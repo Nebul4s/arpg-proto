@@ -5,7 +5,9 @@
 
 #include "AbilitySystemComponent.h"
 #include "GameFramework/CharacterMovementComponent.h"
+#include "Player/ArpgPlayerController.h"
 #include "Player/ArpgPlayerState.h"
+#include "UI/HUD/ArpgHUD.h"
 
 AArpgCharacter::AArpgCharacter()
 {
@@ -43,4 +45,13 @@ void AArpgCharacter::InitAbilityActorInfo()
 	ArpgPlayerState->GetAbilitySystemComponent()->InitAbilityActorInfo(ArpgPlayerState, this);
 	AbilitySystemComponent = ArpgPlayerState->GetAbilitySystemComponent();
 	AttributeSet = ArpgPlayerState->GetAttributeSet();
+
+	if (AArpgPlayerController* PlayerController = Cast<AArpgPlayerController>(GetController()))
+	{
+		if (AArpgHUD* ArpgHUD =	Cast<AArpgHUD>(PlayerController->GetHUD()))
+		{
+			ArpgHUD->InitOverlay(PlayerController, ArpgPlayerState, AbilitySystemComponent, AttributeSet);
+		};
+	};
+	
 }
