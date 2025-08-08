@@ -10,3 +10,7 @@ void UArpgWidgetController::SetWidgetControllerParams(const FWidgetControllerPar
 	AbilitySystemComponent = WidgetControllerParams.AbilitySystemComponent;
 	AttributeSet = WidgetControllerParams.AttributeSet;
 }
+
+void UArpgWidgetController::BroadcastInitialValues()
+{
+}
