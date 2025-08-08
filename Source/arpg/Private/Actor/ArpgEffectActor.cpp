@@ -21,9 +21,9 @@ void AArpgEffectActor::BeginPlay()
 
 }
 
-void AArpgEffectActor::ApplyEffectToTarget(AActor* Target, TSubclassOf<UGameplayEffect> GameplayEffectClass)
+void AArpgEffectActor::ApplyEffectToTarget(AActor* TargetActor, TSubclassOf<UGameplayEffect> GameplayEffectClass)
 {
-	UAbilitySystemComponent* TargetASC = UAbilitySystemBlueprintLibrary::GetAbilitySystemComponent(Target);
+	UAbilitySystemComponent* TargetASC = UAbilitySystemBlueprintLibrary::GetAbilitySystemComponent(TargetActor);
 	if (TargetASC == nullptr) return;
 
 	check(GameplayEffectClass);
@@ -31,6 +31,14 @@ void AArpgEffectActor::ApplyEffectToTarget(AActor* Target, TSubclassOf<UGameplay
 	EffectContextHandle.AddSourceObject(this);
 	const FGameplayEffectSpecHandle EffectSpecHandle = TargetASC->MakeOutgoingSpec(GameplayEffectClass, 1.f, EffectContextHandle);
 	TargetASC->ApplyGameplayEffectSpecToSelf(*EffectSpecHandle.Data.Get());
+}
+
+void AArpgEffectActor::OnOverlap(AActor* TargetActor)
+{
+}
+
+void AArpgEffectActor::OnEndOverlap(AActor* TargetActor)
+{
 }
 
 
