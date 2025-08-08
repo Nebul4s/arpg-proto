@@ -14,3 +14,40 @@ void UOverlayWidgetController::BroadcastInitialValues()
 	OnManaChanged.Broadcast(ArpgAttributeSet->GetMana());
 	OnMaxManaChanged.Broadcast(ArpgAttributeSet->GetMaxMana());
 }
+
+void UOverlayWidgetController::BindCallbacksToDependencies()
+{
+	const UArpgAttributeSet* ArpgAttributeSet = CastChecked<UArpgAttributeSet>(AttributeSet);
+
+	AbilitySystemComponent->GetGameplayAttributeValueChangeDelegate(
+		ArpgAttributeSet->GetLifeAttribute()).AddUObject(this, &UOverlayWidgetController::LifeChanged);
+
+	AbilitySystemComponent->GetGameplayAttributeValueChangeDelegate(
+		ArpgAttributeSet->GetMaxLifeAttribute()).AddUObject(this, &UOverlayWidgetController::MaxLifeChanged);
+
+	AbilitySystemComponent->GetGameplayAttributeValueChangeDelegate(
+		ArpgAttributeSet->GetManaAttribute()).AddUObject(this, &UOverlayWidgetController::ManaChanged);
+
+	AbilitySystemComponent->GetGameplayAttributeValueChangeDelegate(
+		ArpgAttributeSet->GetMaxManaAttribute()).AddUObject(this, &UOverlayWidgetController::MaxManaChanged);
+}
+
+void UOverlayWidgetController::LifeChanged(const FOnAttributeChangeData& Data) const
+{
+	OnLifeChanged.Broadcast(Data.NewValue);
+}
+
+void UOverlayWidgetController::MaxLifeChanged(const FOnAttributeChangeData& Data) const
+{
+	OnMaxLifeChanged.Broadcast(Data.NewValue);
+}
+
+void UOverlayWidgetController::ManaChanged(const FOnAttributeChangeData& Data) const
+{
+	OnManaChanged.Broadcast(Data.NewValue);
+}
+
+void UOverlayWidgetController::MaxManaChanged(const FOnAttributeChangeData& Data) const
+{
+	OnMaxManaChanged.Broadcast(Data.NewValue);
+}

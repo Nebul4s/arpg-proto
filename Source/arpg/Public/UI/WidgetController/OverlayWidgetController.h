@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "AbilitySystem/ArpgAttributeSet.h"
 #include "UI/WidgetController/ArpgWidgetController.h"
 #include "OverlayWidgetController.generated.h"
 
@@ -20,6 +21,7 @@ class ARPG_API UOverlayWidgetController : public UArpgWidgetController
 	GENERATED_BODY()
 public:
 	virtual void BroadcastInitialValues() override;
+	virtual void BindCallbacksToDependencies() override;
 
 	UPROPERTY(BlueprintAssignable, Category="GAS|Attributes")
 	FOnLifeChangedSignature OnLifeChanged;
@@ -32,4 +34,9 @@ public:
 	
 	UPROPERTY(BlueprintAssignable, Category="GAS|Attributes")
 	FOnMaxManaChangedSignature OnMaxManaChanged;
+protected:
+	void LifeChanged(const FOnAttributeChangeData& Data) const;
+	void MaxLifeChanged(const FOnAttributeChangeData& Data) const;
+	void ManaChanged(const FOnAttributeChangeData& Data) const;
+	void MaxManaChanged(const FOnAttributeChangeData& Data) const;
 };

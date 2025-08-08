@@ -14,3 +14,7 @@ void UArpgWidgetController::SetWidgetControllerParams(const FWidgetControllerPar
 void UArpgWidgetController::BroadcastInitialValues()
 {
 }
+
+void UArpgWidgetController::BindCallbacksToDependencies()
+{
+}
