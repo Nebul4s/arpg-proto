@@ -83,34 +83,117 @@ public:
 	/*
 	 *Primary Attributes End
 	*/
+
+	/*
+	 *Secondary Attributes Start
+	*/
+
+	UPROPERTY(BlueprintReadOnly, ReplicatedUsing=OnRep_Armor, Category="Secondary Attributes")
+	FGameplayAttributeData Armor;
+	ATTRIBUTE_ACCESSORS(UArpgAttributeSet, Armor);
+
+	UPROPERTY(BlueprintReadOnly, ReplicatedUsing=OnRep_Evasion, Category="Secondary Attributes")
+	FGameplayAttributeData Evasion;
+	ATTRIBUTE_ACCESSORS(UArpgAttributeSet, Evasion);
+
+	UPROPERTY(BlueprintReadOnly, ReplicatedUsing=OnRep_EnergyShield, Category="Secondary Attributes")
+	FGameplayAttributeData EnergyShield;
+	ATTRIBUTE_ACCESSORS(UArpgAttributeSet, EnergyShield);
+
+	UPROPERTY(BlueprintReadOnly, ReplicatedUsing=OnRep_BlockChance, Category="Secondary Attributes")
+	FGameplayAttributeData BlockChance;
+	ATTRIBUTE_ACCESSORS(UArpgAttributeSet, BlockChance);
+
+	UPROPERTY(BlueprintReadOnly, ReplicatedUsing=OnRep_MovementSpeed, Category="Secondary Attributes")
+	FGameplayAttributeData MovementSpeed;
+	ATTRIBUTE_ACCESSORS(UArpgAttributeSet, MovementSpeed);
+
+	UPROPERTY(BlueprintReadOnly, ReplicatedUsing=OnRep_HealthRegeneration, Category="Secondary Attributes")
+	FGameplayAttributeData HealthRegeneration;
+	ATTRIBUTE_ACCESSORS(UArpgAttributeSet, HealthRegeneration);
+
+	UPROPERTY(BlueprintReadOnly, ReplicatedUsing=OnRep_ManaRegeneration, Category="Secondary Attributes")
+	FGameplayAttributeData ManaRegeneration;
+	ATTRIBUTE_ACCESSORS(UArpgAttributeSet, ManaRegeneration);
+
+	UPROPERTY(BlueprintReadOnly, ReplicatedUsing=OnRep_CriticalHitChance, Category="Secondary Attributes")
+	FGameplayAttributeData CriticalHitChance;
+	ATTRIBUTE_ACCESSORS(UArpgAttributeSet, CriticalHitChance);
+
+	UPROPERTY(BlueprintReadOnly, ReplicatedUsing=OnRep_CriticalHitMultiplier, Category="Secondary Attributes")
+	FGameplayAttributeData CriticalHitMultiplier;
+	ATTRIBUTE_ACCESSORS(UArpgAttributeSet, CriticalHitMultiplier);
+
+	UPROPERTY(BlueprintReadOnly, ReplicatedUsing=OnRep_AccuracyRating, Category="Secondary Attributes")
+	FGameplayAttributeData AccuracyRating;
+	ATTRIBUTE_ACCESSORS(UArpgAttributeSet, AccuracyRating);
+
+	UPROPERTY(BlueprintReadOnly, ReplicatedUsing=OnRep_AttackSpeed, Category="Secondary Attributes")
+	FGameplayAttributeData AttackSpeed;
+	ATTRIBUTE_ACCESSORS(UArpgAttributeSet, AttackSpeed);
+
+	UPROPERTY(BlueprintReadOnly, ReplicatedUsing=OnRep_CastSpeed, Category="Secondary Attributes")
+	FGameplayAttributeData CastSpeed;
+	ATTRIBUTE_ACCESSORS(UArpgAttributeSet, CastSpeed);
+
+	UPROPERTY(BlueprintReadOnly, ReplicatedUsing=OnRep_MaxMana, Category="Secondary Attributes")
+	FGameplayAttributeData MaxMana;
+	ATTRIBUTE_ACCESSORS(UArpgAttributeSet, MaxMana);
+
+	UPROPERTY(BlueprintReadOnly, ReplicatedUsing=OnRep_MaxLife, Category="Secondary Attributes")
+	FGameplayAttributeData MaxLife;
+	ATTRIBUTE_ACCESSORS(UArpgAttributeSet, MaxLife);
+	
+	UFUNCTION()
+	void OnRep_Armor(const FGameplayAttributeData& OldArmor) const;
+	UFUNCTION()
+	void OnRep_Evasion(const FGameplayAttributeData& OldEvasion) const;
+	UFUNCTION()
+	void OnRep_EnergyShield(const FGameplayAttributeData& OldEnergyShield) const;
+	UFUNCTION()
+	void OnRep_BlockChance(const FGameplayAttributeData& OldBlockChance) const;
+	UFUNCTION()
+	void OnRep_MovementSpeed(const FGameplayAttributeData& OldMovementSpeed) const;
+	UFUNCTION()
+	void OnRep_HealthRegeneration(const FGameplayAttributeData& OldHealthRegeneration) const;
+	UFUNCTION()
+	void OnRep_ManaRegeneration(const FGameplayAttributeData& OldManaRegeneration) const;
+	UFUNCTION()
+	void OnRep_CriticalHitChance(const FGameplayAttributeData& OldCriticalHitChance) const;
+	UFUNCTION()
+	void OnRep_CriticalHitMultiplier(const FGameplayAttributeData& OldCriticalHitMultiplier) const;
+	UFUNCTION()
+	void OnRep_AccuracyRating(const FGameplayAttributeData& OldAccuracyRating) const;
+	UFUNCTION()
+	void OnRep_AttackSpeed(const FGameplayAttributeData& OldAttackSpeed) const;
+	UFUNCTION()
+	void OnRep_CastSpeed(const FGameplayAttributeData& OldCastSpeed) const;
+	UFUNCTION()
+	void OnRep_MaxLife(const FGameplayAttributeData& OldMaxLife) const;
+	UFUNCTION()
+	void OnRep_MaxMana(const FGameplayAttributeData& OldMaxMana) const;
+	
+	/*
+	 *Secondary Attributes End
+	*/
 	
 	/*
 	 *Resource Attributes Start
 	*/
+	
 	UPROPERTY(BlueprintReadOnly, ReplicatedUsing=OnRep_Life, Category="Resource Attributes")
 	FGameplayAttributeData Life;
 	ATTRIBUTE_ACCESSORS(UArpgAttributeSet, Life);
 	
-	UPROPERTY(BlueprintReadOnly, ReplicatedUsing=OnRep_MaxLife, Category="Resource Attributes")
-	FGameplayAttributeData MaxLife;
-	ATTRIBUTE_ACCESSORS(UArpgAttributeSet, MaxLife);
-	
 	UPROPERTY(BlueprintReadOnly, ReplicatedUsing=OnRep_Mana, Category="Resource Attributes")
 	FGameplayAttributeData Mana;
 	ATTRIBUTE_ACCESSORS(UArpgAttributeSet, Mana);
-	
-	UPROPERTY(BlueprintReadOnly, ReplicatedUsing=OnRep_MaxMana, Category="Resource Attributes")
-	FGameplayAttributeData MaxMana;
-	ATTRIBUTE_ACCESSORS(UArpgAttributeSet, MaxMana);
 
 	UFUNCTION()
 	void OnRep_Life(const FGameplayAttributeData& OldLife) const;
 	UFUNCTION()
-	void OnRep_MaxLife(const FGameplayAttributeData& OldMaxLife) const;
-	UFUNCTION()
 	void OnRep_Mana(const FGameplayAttributeData& OldMana) const;
-	UFUNCTION()
-	void OnRep_MaxMana(const FGameplayAttributeData& OldMaxMana) const;
+
 	/*
 	*Resource Attributes End
 	*/

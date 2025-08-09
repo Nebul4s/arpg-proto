@@ -22,11 +22,24 @@ void UArpgAttributeSet::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& Ou
 	DOREPLIFETIME_CONDITION_NOTIFY(UArpgAttributeSet, Strength, COND_None, REPNOTIFY_Always);
 	DOREPLIFETIME_CONDITION_NOTIFY(UArpgAttributeSet, Dexterity, COND_None, REPNOTIFY_Always);
 	DOREPLIFETIME_CONDITION_NOTIFY(UArpgAttributeSet, Intelligence, COND_None, REPNOTIFY_Always);
+
+	DOREPLIFETIME_CONDITION_NOTIFY(UArpgAttributeSet, Armor, COND_None, REPNOTIFY_Always);
+	DOREPLIFETIME_CONDITION_NOTIFY(UArpgAttributeSet, Evasion, COND_None, REPNOTIFY_Always);
+	DOREPLIFETIME_CONDITION_NOTIFY(UArpgAttributeSet, EnergyShield, COND_None, REPNOTIFY_Always);
+	DOREPLIFETIME_CONDITION_NOTIFY(UArpgAttributeSet, BlockChance, COND_None, REPNOTIFY_Always);
+	DOREPLIFETIME_CONDITION_NOTIFY(UArpgAttributeSet, MovementSpeed, COND_None, REPNOTIFY_Always);
+	DOREPLIFETIME_CONDITION_NOTIFY(UArpgAttributeSet, HealthRegeneration, COND_None, REPNOTIFY_Always);
+	DOREPLIFETIME_CONDITION_NOTIFY(UArpgAttributeSet, ManaRegeneration, COND_None, REPNOTIFY_Always);
+	DOREPLIFETIME_CONDITION_NOTIFY(UArpgAttributeSet, CriticalHitChance, COND_None, REPNOTIFY_Always);
+	DOREPLIFETIME_CONDITION_NOTIFY(UArpgAttributeSet, CriticalHitMultiplier, COND_None, REPNOTIFY_Always);
+	DOREPLIFETIME_CONDITION_NOTIFY(UArpgAttributeSet, AccuracyRating, COND_None, REPNOTIFY_Always);
+	DOREPLIFETIME_CONDITION_NOTIFY(UArpgAttributeSet, AttackSpeed, COND_None, REPNOTIFY_Always);
+	DOREPLIFETIME_CONDITION_NOTIFY(UArpgAttributeSet, CastSpeed, COND_None, REPNOTIFY_Always);
+	DOREPLIFETIME_CONDITION_NOTIFY(UArpgAttributeSet, MaxLife, COND_None, REPNOTIFY_Always);
+	DOREPLIFETIME_CONDITION_NOTIFY(UArpgAttributeSet, MaxMana, COND_None, REPNOTIFY_Always);
 	
 	DOREPLIFETIME_CONDITION_NOTIFY(UArpgAttributeSet, Life, COND_None, REPNOTIFY_Always);
-	DOREPLIFETIME_CONDITION_NOTIFY(UArpgAttributeSet, MaxLife, COND_None, REPNOTIFY_Always);
 	DOREPLIFETIME_CONDITION_NOTIFY(UArpgAttributeSet, Mana, COND_None, REPNOTIFY_Always);
-	DOREPLIFETIME_CONDITION_NOTIFY(UArpgAttributeSet, MaxMana, COND_None, REPNOTIFY_Always);
 }
 
 void UArpgAttributeSet::PreAttributeChange(const FGameplayAttribute& Attribute, float& NewValue)
@@ -127,4 +140,64 @@ void UArpgAttributeSet::OnRep_Mana(const FGameplayAttributeData& OldMana) const
 void UArpgAttributeSet::OnRep_MaxMana(const FGameplayAttributeData& OldMaxMana) const
 {
 	GAMEPLAYATTRIBUTE_REPNOTIFY(UArpgAttributeSet, MaxMana, OldMaxMana)
+}
+
+void UArpgAttributeSet::OnRep_Armor(const FGameplayAttributeData& OldArmor) const
+{
+	GAMEPLAYATTRIBUTE_REPNOTIFY(UArpgAttributeSet, Armor ,OldArmor)
+}
+
+void UArpgAttributeSet::OnRep_Evasion(const FGameplayAttributeData& OldEvasion) const
+{
+	GAMEPLAYATTRIBUTE_REPNOTIFY(UArpgAttributeSet, Evasion,OldEvasion)
+}
+
+void UArpgAttributeSet::OnRep_EnergyShield(const FGameplayAttributeData& OldEnergyShield) const
+{
+	GAMEPLAYATTRIBUTE_REPNOTIFY(UArpgAttributeSet, EnergyShield,OldEnergyShield)
+}
+
+void UArpgAttributeSet::OnRep_BlockChance(const FGameplayAttributeData& OldBlockChance) const
+{
+	GAMEPLAYATTRIBUTE_REPNOTIFY(UArpgAttributeSet, BlockChance,OldBlockChance)
+}
+
+void UArpgAttributeSet::OnRep_MovementSpeed(const FGameplayAttributeData& OldMovementSpeed) const
+{
+	GAMEPLAYATTRIBUTE_REPNOTIFY(UArpgAttributeSet, MovementSpeed,OldMovementSpeed)
+}
+
+void UArpgAttributeSet::OnRep_HealthRegeneration(const FGameplayAttributeData& OldHealthRegeneration) const
+{
+	GAMEPLAYATTRIBUTE_REPNOTIFY(UArpgAttributeSet, HealthRegeneration,OldHealthRegeneration)
+}
+
+void UArpgAttributeSet::OnRep_ManaRegeneration(const FGameplayAttributeData& OldManaRegeneration) const
+{
+	GAMEPLAYATTRIBUTE_REPNOTIFY(UArpgAttributeSet, ManaRegeneration,OldManaRegeneration)
+}
+
+void UArpgAttributeSet::OnRep_CriticalHitChance(const FGameplayAttributeData& OldCriticalHitChance) const
+{
+	GAMEPLAYATTRIBUTE_REPNOTIFY(UArpgAttributeSet, CriticalHitChance,OldCriticalHitChance)
+}
+
+void UArpgAttributeSet::OnRep_CriticalHitMultiplier(const FGameplayAttributeData& OldCriticalHitMultiplier) const
+{
+	GAMEPLAYATTRIBUTE_REPNOTIFY(UArpgAttributeSet, CriticalHitMultiplier,OldCriticalHitMultiplier)
+}
+
+void UArpgAttributeSet::OnRep_AccuracyRating(const FGameplayAttributeData& OldAccuracyRating) const
+{
+	GAMEPLAYATTRIBUTE_REPNOTIFY(UArpgAttributeSet, AccuracyRating,OldAccuracyRating)
+}
+
+void UArpgAttributeSet::OnRep_AttackSpeed(const FGameplayAttributeData& OldAttackSpeed) const
+{
+	GAMEPLAYATTRIBUTE_REPNOTIFY(UArpgAttributeSet, AttackSpeed,OldAttackSpeed)
+}
+
+void UArpgAttributeSet::OnRep_CastSpeed(const FGameplayAttributeData& OldCastSpeed) const
+{
+	GAMEPLAYATTRIBUTE_REPNOTIFY(UArpgAttributeSet, CastSpeed,OldCastSpeed)
 }
