@@ -25,4 +25,8 @@ void AArpgCharacterBase::BeginPlay()
 	
 }
 
+void AArpgCharacterBase::InitAbilityActorInfo()
+{
+}
+
 
