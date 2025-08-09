@@ -80,7 +80,14 @@ void UArpgAttributeSet::PostGameplayEffectExecute(const struct FGameplayEffectMo
 	FEffectProperties EffectProperties;
 	SetEffectProperties(Data, EffectProperties);
 
-	
+	if (Data.EvaluatedData.Attribute == GetLifeAttribute())
+	{
+		SetLife(FMath::Clamp(GetLife(), 0.f, GetMaxLife()));
+	}
+	if (Data.EvaluatedData.Attribute == GetManaAttribute())
+	{
+		SetMana(FMath::Clamp(GetMana(), 0.f, GetMaxMana()));
+	}
 }
 
 void UArpgAttributeSet::OnRep_Life(const FGameplayAttributeData& OldLife) const
