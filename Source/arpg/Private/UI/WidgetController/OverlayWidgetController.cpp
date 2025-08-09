@@ -21,16 +21,36 @@ void UOverlayWidgetController::BindCallbacksToDependencies()
 	const UArpgAttributeSet* ArpgAttributeSet = CastChecked<UArpgAttributeSet>(AttributeSet);
 
 	AbilitySystemComponent->GetGameplayAttributeValueChangeDelegate(
-		ArpgAttributeSet->GetLifeAttribute()).AddUObject(this, &UOverlayWidgetController::LifeChanged);
+	ArpgAttributeSet->GetLifeAttribute()).AddLambda(
+	[this](const FOnAttributeChangeData& Data)
+		{
+			OnLifeChanged.Broadcast(Data.NewValue);
+		}
+	);
 
 	AbilitySystemComponent->GetGameplayAttributeValueChangeDelegate(
-		ArpgAttributeSet->GetMaxLifeAttribute()).AddUObject(this, &UOverlayWidgetController::MaxLifeChanged);
+	ArpgAttributeSet->GetMaxLifeAttribute()).AddLambda(
+	[this](const FOnAttributeChangeData& Data)
+		{
+			OnMaxLifeChanged.Broadcast(Data.NewValue);
+		}
+	);
 
 	AbilitySystemComponent->GetGameplayAttributeValueChangeDelegate(
-		ArpgAttributeSet->GetManaAttribute()).AddUObject(this, &UOverlayWidgetController::ManaChanged);
+	ArpgAttributeSet->GetManaAttribute()).AddLambda(
+	[this](const FOnAttributeChangeData& Data)
+		{
+			OnManaChanged.Broadcast(Data.NewValue);
+		}
+	);
 
 	AbilitySystemComponent->GetGameplayAttributeValueChangeDelegate(
-		ArpgAttributeSet->GetMaxManaAttribute()).AddUObject(this, &UOverlayWidgetController::MaxManaChanged);
+	ArpgAttributeSet->GetMaxManaAttribute()).AddLambda(
+	[this](const FOnAttributeChangeData& Data)
+		{
+			OnMaxManaChanged.Broadcast(Data.NewValue);
+		}
+	);
 
 	Cast<UArpgAbilitySystemComponent>(AbilitySystemComponent)->EffectAssetTags.AddLambda(
 		[this](const FGameplayTagContainer& AssetTags)
@@ -42,24 +62,4 @@ void UOverlayWidgetController::BindCallbacksToDependencies()
 			}
 		}
 	);
-}
-
-void UOverlayWidgetController::LifeChanged(const FOnAttributeChangeData& Data) const
-{
-	OnLifeChanged.Broadcast(Data.NewValue);
-}
-
-void UOverlayWidgetController::MaxLifeChanged(const FOnAttributeChangeData& Data) const
-{
-	OnMaxLifeChanged.Broadcast(Data.NewValue);
-}
-
-void UOverlayWidgetController::ManaChanged(const FOnAttributeChangeData& Data) const
-{
-	OnManaChanged.Broadcast(Data.NewValue);
-}
-
-void UOverlayWidgetController::MaxManaChanged(const FOnAttributeChangeData& Data) const
-{
-	OnMaxManaChanged.Broadcast(Data.NewValue);
 }
