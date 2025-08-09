@@ -10,9 +10,7 @@
 UArpgAttributeSet::UArpgAttributeSet()
 {
 	InitLife(50.f);
-	InitMaxLife(100.f);
 	InitMana(25.f);
-	InitMaxMana(50.f);
 }
 
 void UArpgAttributeSet::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const
