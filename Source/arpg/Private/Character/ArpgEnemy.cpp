@@ -33,6 +33,11 @@ void AArpgEnemy::UnHighlightActor()
 	Weapon->SetRenderCustomDepth(false);
 }
 
+int32 AArpgEnemy::GetPlayerLevel()
+{
+	return Level;
+}
+
 void AArpgEnemy::BeginPlay()
 {
 	Super::BeginPlay();

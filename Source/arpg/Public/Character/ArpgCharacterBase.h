@@ -6,13 +6,14 @@
 #include "GameFramework/Character.h"
 #include "AbilitySystemInterface.h"
 #include "GameplayEffect.h"
+#include "Interaction/CombatInterface.h"
 #include "ArpgCharacterBase.generated.h"
 
 class UAbilitySystemComponent;
 class UAttributeSet;
 
 UCLASS(Abstract)
-class ARPG_API AArpgCharacterBase : public ACharacter, public IAbilitySystemInterface
+class ARPG_API AArpgCharacterBase : public ACharacter, public IAbilitySystemInterface, public ICombatInterface
 {
 	GENERATED_BODY()
 
