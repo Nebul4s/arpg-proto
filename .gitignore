@@ -1,16 +1,36 @@
-Binaries
-DerivedDataCache
-Intermediate
-Saved
-Build
+# Ignore Unreal Engine generated folders
+Binaries/
+DerivedDataCache/
+Intermediate/
+Saved/
+Build/
 
-.vscode
-.vs
+# Ignore IDE and editor files
+.vscode/
+.vs/
+.idea/
+.idea.arpg.dir/
+
+# Ignore Visual Studio database and solution files
 *.VC.db
 *.opensdf
 *.opendb
 *.sdf
 *.sln
 *.suo
-*.xcodeproj
-*.xcworkspace
+
+# Ignore Xcode project files
+*.xcodeproj/
+*.xcworkspace/
+
+# Ignore Mac OS metadata files (optional)
+.DS_Store
+
+# Ignore compiled binaries (optional, if you have any outside Binaries/)
+*.exe
+*.dll
+*.app
+
+# Ignore log files
+*.log
+UpgradeLog.htm

@@ -4,6 +4,7 @@
 #include "Character/ArpgCharacterBase.h"
 
 #include "AbilitySystemComponent.h"
+#include "AbilitySystem/ArpgAbilitySystemComponent.h"
 
 AArpgCharacterBase::AArpgCharacterBase()
 {
@@ -46,6 +47,14 @@ void AArpgCharacterBase::InitializeDefaultAttributes() const
 	ApplyEffectToSelf(DefaultPrimaryAttributes, 1.f);
 	ApplyEffectToSelf(DefaultSecondaryAttributes, 1.f);
 	ApplyEffectToSelf(DefaultResourceAttributes, 1.f);
+}
+
+void AArpgCharacterBase::AddCharacterAbilities()
+{
+	UArpgAbilitySystemComponent* ArpgASC = CastChecked<UArpgAbilitySystemComponent>(AbilitySystemComponent);
+	if (!HasAuthority()) return;
+
+	ArpgASC->AddCharacterAbilities(StartupAbilities);
 }
 
 
