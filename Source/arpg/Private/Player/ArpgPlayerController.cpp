@@ -3,7 +3,7 @@
 
 #include "Player/ArpgPlayerController.h"
 #include "EnhancedInputSubsystems.h"
-#include "EnhancedInputComponent.h"
+#include "Input/ArpgInputComponent.h"
 #include "Interaction/EnemyInterface.h"
 
 AArpgPlayerController::AArpgPlayerController()
@@ -35,6 +35,21 @@ void AArpgPlayerController::CursorTrace()
 	}
 }
 
+void AArpgPlayerController::AbilityInputTagPressed(FGameplayTag InputTag)
+{
+	GEngine->AddOnScreenDebugMessage(1, 3.f, FColor::Red, *InputTag.ToString());
+}
+
+void AArpgPlayerController::AbilityInputTagReleased(FGameplayTag InputTag)
+{
+	GEngine->AddOnScreenDebugMessage(2, 3.f, FColor::Red, *InputTag.ToString());
+}
+
+void AArpgPlayerController::AbilityInputTagHeld(FGameplayTag InputTag)
+{
+	GEngine->AddOnScreenDebugMessage(3, 3.f, FColor::Red, *InputTag.ToString());
+}
+
 
 void AArpgPlayerController::BeginPlay()
 {
@@ -61,9 +76,9 @@ void AArpgPlayerController::SetupInputComponent()
 {
 	Super::SetupInputComponent();
 
-	UEnhancedInputComponent* EnhancedInputComponent = CastChecked<UEnhancedInputComponent>(InputComponent);
-
-	EnhancedInputComponent->BindAction(MoveAction, ETriggerEvent::Triggered, this, &AArpgPlayerController::Move);
+	UArpgInputComponent* ArpgInputComponent = CastChecked<UArpgInputComponent>(InputComponent);
+	ArpgInputComponent->BindAction(MoveAction, ETriggerEvent::Triggered, this, &AArpgPlayerController::Move);
+	ArpgInputComponent->BindAbilityActions(InputConfig, this, &ThisClass::AbilityInputTagPressed, &ThisClass::AbilityInputTagReleased, &ThisClass::AbilityInputTagHeld);
 }
 
 void AArpgPlayerController::Move(const struct FInputActionValue& InputActionValue)
