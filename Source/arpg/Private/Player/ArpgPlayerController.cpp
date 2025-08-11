@@ -2,7 +2,10 @@
 
 
 #include "Player/ArpgPlayerController.h"
+
+#include "AbilitySystemBlueprintLibrary.h"
 #include "EnhancedInputSubsystems.h"
+#include "AbilitySystem/ArpgAbilitySystemComponent.h"
 #include "Input/ArpgInputComponent.h"
 #include "Interaction/EnemyInterface.h"
 
@@ -37,17 +40,28 @@ void AArpgPlayerController::CursorTrace()
 
 void AArpgPlayerController::AbilityInputTagPressed(FGameplayTag InputTag)
 {
-	GEngine->AddOnScreenDebugMessage(1, 3.f, FColor::Red, *InputTag.ToString());
+	//GEngine->AddOnScreenDebugMessage(1, 3.f, FColor::Red, *InputTag.ToString());
 }
 
 void AArpgPlayerController::AbilityInputTagReleased(FGameplayTag InputTag)
 {
-	GEngine->AddOnScreenDebugMessage(2, 3.f, FColor::Red, *InputTag.ToString());
+	if (GetASC() == nullptr) return;
+	GetASC()->AbilityInputTagReleased(InputTag);
 }
 
 void AArpgPlayerController::AbilityInputTagHeld(FGameplayTag InputTag)
 {
-	GEngine->AddOnScreenDebugMessage(3, 3.f, FColor::Red, *InputTag.ToString());
+	if (GetASC() == nullptr) return;
+	GetASC()->AbilityInputTagHeld(InputTag);
+}
+
+UArpgAbilitySystemComponent* AArpgPlayerController::GetASC()
+{
+	if (ArpgAbilitySystemComponent == nullptr)
+	{
+		ArpgAbilitySystemComponent = Cast<UArpgAbilitySystemComponent>(UAbilitySystemBlueprintLibrary::GetAbilitySystemComponent(GetPawn<APawn>()));
+	}
+	return ArpgAbilitySystemComponent;
 }
 
 

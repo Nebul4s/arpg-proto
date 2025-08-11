@@ -11,6 +11,7 @@ class UArpgInputConfig;
 class UInputMappingContext;
 class UInputAction;
 class IEnemyInterface;
+class UArpgAbilitySystemComponent;
 /**
  * 
  */
@@ -44,4 +45,8 @@ private:
 	
 	UPROPERTY(EditDefaultsOnly, Category="Input")
 	TObjectPtr<UArpgInputConfig> InputConfig;
+
+	UPROPERTY()
+	TObjectPtr<UArpgAbilitySystemComponent> ArpgAbilitySystemComponent;
+	UArpgAbilitySystemComponent* GetASC();
 };
