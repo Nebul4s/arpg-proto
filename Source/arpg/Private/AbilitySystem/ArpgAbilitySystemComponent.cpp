@@ -3,6 +3,8 @@
 
 #include "AbilitySystem/ArpgAbilitySystemComponent.h"
 
+#include "ArpgGameplayTags.h"
+
 void UArpgAbilitySystemComponent::AbilityActorInfoSet()
 {
 	OnGameplayEffectAppliedDelegateToSelf.AddUObject(this, &UArpgAbilitySystemComponent::EffectApplied);
