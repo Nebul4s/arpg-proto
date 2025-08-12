@@ -92,6 +92,8 @@ void AArpgPlayerController::SetupInputComponent()
 
 	UArpgInputComponent* ArpgInputComponent = CastChecked<UArpgInputComponent>(InputComponent);
 	ArpgInputComponent->BindAction(MoveAction, ETriggerEvent::Triggered, this, &AArpgPlayerController::Move);
+	ArpgInputComponent->BindAction(ShiftAction, ETriggerEvent::Started, this, &AArpgPlayerController::ShiftPressed);
+	ArpgInputComponent->BindAction(ShiftAction, ETriggerEvent::Completed, this, &AArpgPlayerController::ShiftReleased);
 	ArpgInputComponent->BindAbilityActions(InputConfig, this, &ThisClass::AbilityInputTagPressed, &ThisClass::AbilityInputTagReleased, &ThisClass::AbilityInputTagHeld);
 }
 

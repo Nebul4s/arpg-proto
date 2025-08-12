@@ -5,11 +5,15 @@
 
 #include "AbilitySystemComponent.h"
 #include "AbilitySystem/ArpgAbilitySystemComponent.h"
+#include "Components/CapsuleComponent.h"
 
 AArpgCharacterBase::AArpgCharacterBase()
 {
 	PrimaryActorTick.bCanEverTick = false;
 
+	GetCapsuleComponent()->SetCollisionResponseToChannel(ECC_Camera, ECR_Ignore);
+	GetMesh()->SetCollisionResponseToChannel(ECC_Camera, ECR_Ignore);
+	
 	Weapon = CreateDefaultSubobject<USkeletalMeshComponent>("Weapon");
 	Weapon->SetupAttachment(GetMesh(), FName("WeaponHandSocket"));
 	Weapon->SetCollisionEnabled(ECollisionEnabled::NoCollision);
@@ -31,21 +35,6 @@ void AArpgCharacterBase::BeginPlay()
 FVector AArpgCharacterBase::GetCombatSocketLocation()
 {
 	check(Weapon);
-
-	if (!Weapon->DoesSocketExist(WeaponTipSocketName))
-	{
-		UE_LOG(LogTemp, Error, TEXT("Socket %s does NOT exist on weapon mesh %s"),
-			*WeaponTipSocketName.ToString(),
-			*Weapon->GetName());
-	}
-	else
-	{
-		UE_LOG(LogTemp, Warning, TEXT("Socket %s exists. Location: %s"),
-			*WeaponTipSocketName.ToString(),
-			*Weapon->GetSocketLocation(WeaponTipSocketName).ToString());
-	}
-
-	
 	return Weapon->GetSocketLocation(WeaponTipSocketName);
 }
 
