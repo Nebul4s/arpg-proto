@@ -2,7 +2,7 @@
 
 
 #include "AbilitySystem/Abilities/ArpgProjectileSpell.h"
-
+#include "Components/SphereComponent.h"
 #include "Actor/ArpgProjectile.h"
 #include "Interaction/CombatInterface.h"
 
@@ -40,6 +40,13 @@ void UArpgProjectileSpell::SpawnProjectile(const FVector& ProjectileTargetLocati
 			Cast<APawn>(GetOwningActorFromActorInfo()),
 			ESpawnActorCollisionHandlingMethod::AlwaysSpawn
 			);
+
+		// ignore overlap on casting actor
+		if (ProjectileToSpawn && GetAvatarActorFromActorInfo())
+		{
+			ProjectileToSpawn->Sphere->IgnoreActorWhenMoving(GetAvatarActorFromActorInfo(), true);
+		}
+
 
 		//TODO:: give the projectile  GE for damage
 		
