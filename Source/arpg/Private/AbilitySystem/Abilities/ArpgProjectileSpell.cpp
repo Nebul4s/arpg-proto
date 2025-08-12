@@ -17,7 +17,7 @@ void UArpgProjectileSpell::ActivateAbility(const FGameplayAbilitySpecHandle Hand
 
 }
 
-void UArpgProjectileSpell::SpawnProjectile()
+void UArpgProjectileSpell::SpawnProjectile(const FVector& ProjectileTargetLocation)
 {
 	const bool bIsServer = GetAvatarActorFromActorInfo()->HasAuthority();
 	if (!bIsServer) return;
@@ -26,10 +26,12 @@ void UArpgProjectileSpell::SpawnProjectile()
 	if (CombatInterface)
 	{
 		const FVector SocketLocation = CombatInterface->GetCombatSocketLocation();
-
+		FRotator Rotation = (ProjectileTargetLocation - SocketLocation).Rotation();
+		Rotation.Pitch = 0.f;
+		
 		FTransform SpawnTransform;
 		SpawnTransform.SetLocation(SocketLocation);
-		//TODO:: handle rotation
+		SpawnTransform.SetRotation(Rotation.Quaternion());
 		
 		AArpgProjectile* ProjectileToSpawn = GetWorld()->SpawnActorDeferred<AArpgProjectile>(
 			ProjectileClass,

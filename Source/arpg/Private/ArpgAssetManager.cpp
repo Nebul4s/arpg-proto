@@ -15,6 +15,6 @@ UArpgAssetManager& UArpgAssetManager::Get()
 void UArpgAssetManager::StartInitialLoading()
 {
 	Super::StartInitialLoading();
-
 	FArpgGameplayTags::InitializeNativeGameplayTags();
+	UAbilitySystemGlobals::Get().InitGlobalData();
 }
