@@ -96,6 +96,7 @@ void UArpgAttributeSet::PostGameplayEffectExecute(const struct FGameplayEffectMo
 	if (Data.EvaluatedData.Attribute == GetLifeAttribute())
 	{
 		SetLife(FMath::Clamp(GetLife(), 0.f, GetMaxLife()));
+		UE_LOG(LogTemp, Log, TEXT("Life changed on actor %s, health %f"), *EffectProperties.TargetCharacter->GetName(), GetLife());
 	}
 	if (Data.EvaluatedData.Attribute == GetManaAttribute())
 	{

@@ -2,6 +2,9 @@
 
 
 #include "AbilitySystem/Abilities/ArpgProjectileSpell.h"
+
+#include "AbilitySystemBlueprintLibrary.h"
+#include "AbilitySystemComponent.h"
 #include "Components/SphereComponent.h"
 #include "Actor/ArpgProjectile.h"
 #include "Interaction/CombatInterface.h"
@@ -47,8 +50,9 @@ void UArpgProjectileSpell::SpawnProjectile(const FVector& ProjectileTargetLocati
 			ProjectileToSpawn->Sphere->IgnoreActorWhenMoving(GetAvatarActorFromActorInfo(), true);
 		}
 
-
-		//TODO:: give the projectile  GE for damage
+		const UAbilitySystemComponent* SourceASC = UAbilitySystemBlueprintLibrary::GetAbilitySystemComponent(GetAvatarActorFromActorInfo());
+		const FGameplayEffectSpecHandle SpecHandle = SourceASC->MakeOutgoingSpec(DamageEffectClass, GetAbilityLevel(),SourceASC->MakeEffectContext());
+		ProjectileToSpawn->DamageEffectSpecHandle = SpecHandle;
 		
 		ProjectileToSpawn->FinishSpawning(SpawnTransform);
 	}
