@@ -31,6 +31,21 @@ void AArpgCharacterBase::BeginPlay()
 FVector AArpgCharacterBase::GetCombatSocketLocation()
 {
 	check(Weapon);
+
+	if (!Weapon->DoesSocketExist(WeaponTipSocketName))
+	{
+		UE_LOG(LogTemp, Error, TEXT("Socket %s does NOT exist on weapon mesh %s"),
+			*WeaponTipSocketName.ToString(),
+			*Weapon->GetName());
+	}
+	else
+	{
+		UE_LOG(LogTemp, Warning, TEXT("Socket %s exists. Location: %s"),
+			*WeaponTipSocketName.ToString(),
+			*Weapon->GetSocketLocation(WeaponTipSocketName).ToString());
+	}
+
+	
 	return Weapon->GetSocketLocation(WeaponTipSocketName);
 }
 
