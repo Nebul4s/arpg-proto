@@ -58,6 +58,12 @@ void UExecCalc_Damage::Execute_Implementation(const FGameplayEffectCustomExecuti
 
 	const bool bBlocked = FMath::RandRange(1, 100) < TargetBlockChance;
 	if (bBlocked) Damage = 0.f;
+
+	//armor
+	float TargetArmor = 0;
+	ExecutionParams.AttemptCalculateCapturedAttributeMagnitude(GetArpgDamageStatics().ArmorDef, EvaluateParams, TargetArmor);
+	TargetArmor = FMath::Max<float>(TargetArmor, 0.f);
+	Damage *= (100 - TargetArmor) / 100.f;
 	
 	const FGameplayModifierEvaluatedData EvaluatedData(UArpgAttributeSet::GetIncomingDamageAttribute(), EGameplayModOp::Additive, Damage);
 	OutExecutionOutput.AddOutputModifier(EvaluatedData);
