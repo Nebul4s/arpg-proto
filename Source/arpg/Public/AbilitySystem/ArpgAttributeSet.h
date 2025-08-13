@@ -198,6 +198,13 @@ public:
 	*Resource Attributes End
 	*/
 
+	/*
+	 *Meta Attributes Start
+	*/
+	UPROPERTY(BlueprintReadOnly, Category="Meta Attributes")
+	FGameplayAttributeData IncomingDamage;
+	ATTRIBUTE_ACCESSORS(UArpgAttributeSet, IncomingDamage);
+	
 private:
 	void SetEffectProperties(const struct FGameplayEffectModCallbackData& Data, FEffectProperties& EffectProperties);
 };

@@ -102,6 +102,18 @@ void UArpgAttributeSet::PostGameplayEffectExecute(const struct FGameplayEffectMo
 	{
 		SetMana(FMath::Clamp(GetMana(), 0.f, GetMaxMana()));
 	}
+	if (Data.EvaluatedData.Attribute == GetIncomingDamageAttribute())
+	{
+		const float LocalIncomingDamage = GetIncomingDamage();
+		SetIncomingDamage(0.f);
+		if (LocalIncomingDamage > 0.f)
+		{
+			const float NewLife = GetLife() - LocalIncomingDamage;
+			SetLife(FMath::Clamp(NewLife, 0.f, GetLife()));
+
+			const bool bIsFatal = NewLife <= 0.f;
+		}
+	}
 }
 
 void UArpgAttributeSet::OnRep_Strength(const FGameplayAttributeData& OldStrength) const
