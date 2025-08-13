@@ -5,6 +5,7 @@
 
 #include "AbilitySystemBlueprintLibrary.h"
 #include "AbilitySystemComponent.h"
+#include "ArpgGameplayTags.h"
 #include "Components/SphereComponent.h"
 #include "Actor/ArpgProjectile.h"
 #include "Interaction/CombatInterface.h"
@@ -52,6 +53,13 @@ void UArpgProjectileSpell::SpawnProjectile(const FVector& ProjectileTargetLocati
 
 		const UAbilitySystemComponent* SourceASC = UAbilitySystemBlueprintLibrary::GetAbilitySystemComponent(GetAvatarActorFromActorInfo());
 		const FGameplayEffectSpecHandle SpecHandle = SourceASC->MakeOutgoingSpec(DamageEffectClass, GetAbilityLevel(),SourceASC->MakeEffectContext());
+
+		//scaleable damage by abilitylevel, use curves to determine damage later
+		const float ScaledDamage = Damage.GetValueAtLevel(GetAbilityLevel());
+		
+		const FArpgGameplayTags GameplayTags = FArpgGameplayTags::Get();
+		UAbilitySystemBlueprintLibrary::AssignTagSetByCallerMagnitude(SpecHandle, GameplayTags.Damage, ScaledDamage);
+		
 		ProjectileToSpawn->DamageEffectSpecHandle = SpecHandle;
 		
 		ProjectileToSpawn->FinishSpawning(SpawnTransform);
