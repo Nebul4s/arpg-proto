@@ -6,6 +6,9 @@
 #include "AbilitySystem/ArpgAbilitySystemComponent.h"
 #include "AbilitySystem/ArpgAttributeSet.h"
 #include "arpg/arpg.h"
+#include "ArpgGameplayTags.h"
+#include "AbilitySystem/ArpgAbilitySystemLibrary.h"
+#include "GameFramework/CharacterMovementComponent.h"
 
 
 AArpgEnemy::AArpgEnemy()
@@ -41,7 +44,19 @@ int32 AArpgEnemy::GetPlayerLevel()
 void AArpgEnemy::BeginPlay()
 {
 	Super::BeginPlay();
+	GetCharacterMovement()->MaxWalkSpeed = MaxWalkSpeed;
 	InitAbilityActorInfo();
+	UArpgAbilitySystemLibrary::GiveStartupAbilities(this, AbilitySystemComponent);
+	
+	AbilitySystemComponent->RegisterGameplayTagEvent(FArpgGameplayTags::Get().Stun, EGameplayTagEventType::NewOrRemoved).AddUObject(
+		this, &AArpgEnemy::StunTagChanged
+	);
+}
+
+void AArpgEnemy::StunTagChanged(const FGameplayTag CallbackTag, int32 NewCount)
+{
+	bIsStunned = NewCount > 0;
+	GetCharacterMovement()->MaxWalkSpeed = bIsStunned ? 0.f : MaxWalkSpeed;
 }
 
 void AArpgEnemy::InitAbilityActorInfo()

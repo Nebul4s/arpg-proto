@@ -4,6 +4,7 @@
 #include "AbilitySystem/ArpgAttributeSet.h"
 
 #include "AbilitySystemBlueprintLibrary.h"
+#include "ArpgGameplayTags.h"
 #include "GameFramework/Character.h"
 #include "Net/UnrealNetwork.h"
 
@@ -112,6 +113,12 @@ void UArpgAttributeSet::PostGameplayEffectExecute(const struct FGameplayEffectMo
 			SetLife(FMath::Clamp(NewLife, 0.f, GetLife()));
 
 			const bool bIsFatal = NewLife <= 0.f;
+			if (!bIsFatal)
+			{
+				FGameplayTagContainer TagContainer;
+				TagContainer.AddTag(FArpgGameplayTags::Get().Stun);
+				EffectProperties.TargetASC->TryActivateAbilitiesByTag(TagContainer);
+			}
 		}
 	}
 }

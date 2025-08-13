@@ -6,6 +6,8 @@
 #include "GameFramework/GameModeBase.h"
 #include "ArpgGameModeBase.generated.h"
 
+class UCharacterClassInfo;
+
 /**
  * 
  */
@@ -13,5 +15,9 @@ UCLASS()
 class ARPG_API AArpgGameModeBase : public AGameModeBase
 {
 	GENERATED_BODY()
+
+public:
 	
+	UPROPERTY(EditDefaultsOnly, Category="Character class defaults")
+	TObjectPtr<UCharacterClassInfo> CharacterClassInfo;
 };

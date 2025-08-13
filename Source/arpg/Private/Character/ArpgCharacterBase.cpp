@@ -25,6 +25,11 @@ UAbilitySystemComponent* AArpgCharacterBase::GetAbilitySystemComponent() const
 	return AbilitySystemComponent;
 }
 
+UAnimMontage* AArpgCharacterBase::GetStunMontage_Implementation()
+{
+	return StunMontage;
+}
+
 void AArpgCharacterBase::BeginPlay()
 {
 	Super::BeginPlay();

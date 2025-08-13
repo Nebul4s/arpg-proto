@@ -33,11 +33,19 @@ public:
 	/*
 	*Combat interface end
 	*/
+	void StunTagChanged(const FGameplayTag CallbackTag, int32 NewCount);
 
+	UPROPERTY(BlueprintReadOnly, Category="Combat")
+	bool bIsStunned = false;
+
+	UPROPERTY(BlueprintReadOnly, Category="Combat")
+	float MaxWalkSpeed = 250.f;
 protected:
 	virtual void BeginPlay() override;
 	virtual void InitAbilityActorInfo() override;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="Character class defaults")
 	int32 Level = 1;
+
+	
 };
