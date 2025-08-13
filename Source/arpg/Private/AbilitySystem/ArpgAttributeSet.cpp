@@ -6,6 +6,7 @@
 #include "AbilitySystemBlueprintLibrary.h"
 #include "ArpgGameplayTags.h"
 #include "GameFramework/Character.h"
+#include "Interaction/CombatInterface.h"
 #include "Net/UnrealNetwork.h"
 
 UArpgAttributeSet::UArpgAttributeSet()
@@ -113,7 +114,15 @@ void UArpgAttributeSet::PostGameplayEffectExecute(const struct FGameplayEffectMo
 			SetLife(FMath::Clamp(NewLife, 0.f, GetLife()));
 
 			const bool bIsFatal = NewLife <= 0.f;
-			if (!bIsFatal)
+			if (bIsFatal)
+			{
+				ICombatInterface* CombatInterface = Cast<ICombatInterface>(EffectProperties.TargetAvatarActor);
+				if (CombatInterface)
+				{
+					CombatInterface->Die();
+				}
+			}
+			else
 			{
 				FGameplayTagContainer TagContainer;
 				TagContainer.AddTag(FArpgGameplayTags::Get().Stun);

@@ -30,6 +30,7 @@ public:
 	*Combat interface
 	*/
 	virtual int32 GetPlayerLevel() override;
+	virtual void Die() override;
 	/*
 	*Combat interface end
 	*/
@@ -40,6 +41,9 @@ public:
 
 	UPROPERTY(BlueprintReadOnly, Category="Combat")
 	float MaxWalkSpeed = 250.f;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="Combat")
+	float LifeSpan = 5.f;
 protected:
 	virtual void BeginPlay() override;
 	virtual void InitAbilityActorInfo() override;

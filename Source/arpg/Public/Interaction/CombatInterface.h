@@ -30,4 +30,6 @@ public:
 
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
 	UAnimMontage* GetStunMontage();
+
+	virtual void Die() = 0;
 };
