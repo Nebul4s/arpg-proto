@@ -11,10 +11,14 @@ struct ArpgDamageStatics
 {
 	DECLARE_ATTRIBUTE_CAPTUREDEF(Armor);
 	DECLARE_ATTRIBUTE_CAPTUREDEF(BlockChance);
+	DECLARE_ATTRIBUTE_CAPTUREDEF(CriticalHitChance);
+	DECLARE_ATTRIBUTE_CAPTUREDEF(CriticalHitMultiplier);
 	ArpgDamageStatics()
 	{
 		DEFINE_ATTRIBUTE_CAPTUREDEF(UArpgAttributeSet, Armor, Target, false);
 		DEFINE_ATTRIBUTE_CAPTUREDEF(UArpgAttributeSet, BlockChance, Target, false);
+		DEFINE_ATTRIBUTE_CAPTUREDEF(UArpgAttributeSet, CriticalHitChance, Source, false);
+		DEFINE_ATTRIBUTE_CAPTUREDEF(UArpgAttributeSet, CriticalHitMultiplier, Source, false);
 	}
 };
 
@@ -29,6 +33,8 @@ UExecCalc_Damage::UExecCalc_Damage()
 {
 	RelevantAttributesToCapture.Add((GetArpgDamageStatics().ArmorDef));
 	RelevantAttributesToCapture.Add((GetArpgDamageStatics().BlockChanceDef));
+	RelevantAttributesToCapture.Add((GetArpgDamageStatics().CriticalHitChanceDef));
+	RelevantAttributesToCapture.Add((GetArpgDamageStatics().CriticalHitMultiplierDef));
 }
 
 void UExecCalc_Damage::Execute_Implementation(const FGameplayEffectCustomExecutionParameters& ExecutionParams,
@@ -64,6 +70,17 @@ void UExecCalc_Damage::Execute_Implementation(const FGameplayEffectCustomExecuti
 	ExecutionParams.AttemptCalculateCapturedAttributeMagnitude(GetArpgDamageStatics().ArmorDef, EvaluateParams, TargetArmor);
 	TargetArmor = FMath::Max<float>(TargetArmor, 0.f);
 	Damage *= (100 - TargetArmor) / 100.f;
+
+	//critical hits
+	float SourceCriticalHitChance = 0;
+	ExecutionParams.AttemptCalculateCapturedAttributeMagnitude(GetArpgDamageStatics().CriticalHitChanceDef, EvaluateParams, SourceCriticalHitChance);
+	SourceCriticalHitChance = FMath::Max<float>(SourceCriticalHitChance, 0.f);
+	float SourceCriticalHitMultiplier = 0;
+	ExecutionParams.AttemptCalculateCapturedAttributeMagnitude(GetArpgDamageStatics().CriticalHitMultiplierDef, EvaluateParams, SourceCriticalHitMultiplier);
+	SourceCriticalHitMultiplier = FMath::Max<float>(SourceCriticalHitMultiplier, 0.f);
+
+	const bool bIsCriticalHit = FMath::RandRange(1, 100) < SourceCriticalHitChance;
+	if (bIsCriticalHit) Damage *= SourceCriticalHitMultiplier / 100.f;
 	
 	const FGameplayModifierEvaluatedData EvaluatedData(UArpgAttributeSet::GetIncomingDamageAttribute(), EGameplayModOp::Additive, Damage);
 	OutExecutionOutput.AddOutputModifier(EvaluatedData);
