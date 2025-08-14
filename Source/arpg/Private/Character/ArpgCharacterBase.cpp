@@ -22,6 +22,7 @@ AArpgCharacterBase::AArpgCharacterBase()
 
 UAbilitySystemComponent* AArpgCharacterBase::GetAbilitySystemComponent() const
 {
+	//returns the abilitysystemcomponent belonging to the child class of this class
 	return AbilitySystemComponent;
 }
 
@@ -38,6 +39,7 @@ void AArpgCharacterBase::Die()
 
 void AArpgCharacterBase::MulticastHandleDeath_Implementation()
 {
+	//ragdoll on death
 	Weapon->SetSimulatePhysics(true);
 	Weapon->SetEnableGravity(true);
 	Weapon->SetCollisionEnabled(ECollisionEnabled::PhysicsOnly);

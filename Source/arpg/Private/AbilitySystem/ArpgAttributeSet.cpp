@@ -57,6 +57,10 @@ void UArpgAttributeSet::PreAttributeChange(const FGameplayAttribute& Attribute, 
 void UArpgAttributeSet::SetEffectProperties(const struct FGameplayEffectModCallbackData& Data,
 	FEffectProperties& EffectProperties)
 {
+	/*
+	 * Sets effect properties to keep PostGameplayEffectExecute func clean
+	 */
+	
 	EffectProperties.EffectContextHandle = Data.EffectSpec.GetContext();
 	EffectProperties.SourceASC = EffectProperties.EffectContextHandle.GetOriginalInstigatorAbilitySystemComponent();
 
@@ -90,6 +94,9 @@ void UArpgAttributeSet::SetEffectProperties(const struct FGameplayEffectModCallb
 
 void UArpgAttributeSet::PostGameplayEffectExecute(const struct FGameplayEffectModCallbackData& Data)
 {
+	/*
+	 * Called just after a GameplayEffect is executed to modify the base value of an attribute.
+	 */
 	Super::PostGameplayEffectExecute(Data);
 
 	FEffectProperties EffectProperties;
@@ -116,6 +123,7 @@ void UArpgAttributeSet::PostGameplayEffectExecute(const struct FGameplayEffectMo
 			const bool bIsFatal = NewLife <= 0.f;
 			if (bIsFatal)
 			{
+				//check if target implements ICombatInterface function, if so execute Die function, if not do nothing
 				ICombatInterface* CombatInterface = Cast<ICombatInterface>(EffectProperties.TargetAvatarActor);
 				if (CombatInterface)
 				{
@@ -124,6 +132,8 @@ void UArpgAttributeSet::PostGameplayEffectExecute(const struct FGameplayEffectMo
 			}
 			else
 			{
+				//if hit was not fatal stun effect will be applied
+				//this will have to change as it means 100% chance to stun if the enemy did not die
 				FGameplayTagContainer TagContainer;
 				TagContainer.AddTag(FArpgGameplayTags::Get().Stun);
 				EffectProperties.TargetASC->TryActivateAbilitiesByTag(TagContainer);

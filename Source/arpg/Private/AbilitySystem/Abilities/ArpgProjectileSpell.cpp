@@ -15,10 +15,6 @@ void UArpgProjectileSpell::ActivateAbility(const FGameplayAbilitySpecHandle Hand
                                            const FGameplayEventData* TriggerEventData)
 {
 	Super::ActivateAbility(Handle, ActorInfo, ActivationInfo, TriggerEventData);
-
-
-	
-
 }
 
 void UArpgProjectileSpell::SpawnProjectile(const FVector& ProjectileTargetLocation)

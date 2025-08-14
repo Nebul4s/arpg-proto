@@ -27,9 +27,12 @@ void AArpgEffectActor::ApplyEffectToTarget(AActor* TargetActor, TSubclassOf<UGam
 	if (TargetASC == nullptr) return;
 
 	check(GameplayEffectClass);
+	//context handle is a container for misc info about the effect, such as the source or the target
 	FGameplayEffectContextHandle EffectContextHandle = TargetASC->MakeEffectContext();
 	EffectContextHandle.AddSourceObject(this);
+	//effectspec is a "blueprint" for GE instance specifying its duration, modifiers and tags
 	const FGameplayEffectSpecHandle EffectSpecHandle = TargetASC->MakeOutgoingSpec(GameplayEffectClass, 1.f, EffectContextHandle);
+	//applies the effect to the TargetASC
 	const FActiveGameplayEffectHandle ActiveEffectHandle = TargetASC->ApplyGameplayEffectSpecToSelf(*EffectSpecHandle.Data.Get());
 
 	const bool bIsInfinite = EffectSpecHandle.Data.Get()->Def.Get()->DurationPolicy == EGameplayEffectDurationType::Infinite;

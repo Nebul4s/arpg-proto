@@ -17,7 +17,8 @@ void UTargetDataUnderMouse::Activate()
 	if (bIsLocallyControlled)
 	{
 		SendMouseCursorData();
-	}else
+	}
+	else
 	{
 		const FGameplayAbilitySpecHandle SpecHandle = GetAbilitySpecHandle();
 		const FPredictionKey ActivationPredictionKey = GetActivationPredictionKey(); 
@@ -28,9 +29,6 @@ void UTargetDataUnderMouse::Activate()
 			SetWaitingOnRemotePlayerData();
 		}
 	}
-	
-
-	
 }
 
 void UTargetDataUnderMouse::SendMouseCursorData()
