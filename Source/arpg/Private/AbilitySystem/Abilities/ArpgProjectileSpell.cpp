@@ -40,15 +40,20 @@ void UArpgProjectileSpell::SpawnProjectile(const FVector& ProjectileTargetLocati
 			Cast<APawn>(GetOwningActorFromActorInfo()),
 			ESpawnActorCollisionHandlingMethod::AlwaysSpawn
 			);
-
-		// ignore overlap on casting actor
-		if (ProjectileToSpawn && GetAvatarActorFromActorInfo())
-		{
-			ProjectileToSpawn->Sphere->IgnoreActorWhenMoving(GetAvatarActorFromActorInfo(), true);
-		}
-
+		
 		const UAbilitySystemComponent* SourceASC = UAbilitySystemBlueprintLibrary::GetAbilitySystemComponent(GetAvatarActorFromActorInfo());
-		const FGameplayEffectSpecHandle SpecHandle = SourceASC->MakeOutgoingSpec(DamageEffectClass, GetAbilityLevel(),SourceASC->MakeEffectContext());
+		
+		FGameplayEffectContextHandle EffectContextHandle = SourceASC->MakeEffectContext();
+		EffectContextHandle.SetAbility(this);
+		EffectContextHandle.AddSourceObject(ProjectileToSpawn);
+		TArray<TWeakObjectPtr<AActor>> SpawnedActors;
+		SpawnedActors.Add(ProjectileToSpawn);
+		EffectContextHandle.AddActors(SpawnedActors);
+		FHitResult HitResult;
+		HitResult.Location = ProjectileTargetLocation;
+		EffectContextHandle.AddHitResult(HitResult);
+		
+		const FGameplayEffectSpecHandle SpecHandle = SourceASC->MakeOutgoingSpec(DamageEffectClass, GetAbilityLevel(),EffectContextHandle);
 
 		//scaleable damage by abilitylevel, use curves to determine damage later
 		const float ScaledDamage = Damage.GetValueAtLevel(GetAbilityLevel());
