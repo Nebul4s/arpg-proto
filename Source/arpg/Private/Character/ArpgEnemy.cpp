@@ -52,7 +52,10 @@ void AArpgEnemy::BeginPlay()
 	Super::BeginPlay();
 	GetCharacterMovement()->MaxWalkSpeed = MaxWalkSpeed;
 	InitAbilityActorInfo();
-	UArpgAbilitySystemLibrary::GiveStartupAbilities(this, AbilitySystemComponent);
+	if (HasAuthority())
+	{
+		UArpgAbilitySystemLibrary::GiveStartupAbilities(this, AbilitySystemComponent);
+	}
 	
 	AbilitySystemComponent->RegisterGameplayTagEvent(FArpgGameplayTags::Get().Stun, EGameplayTagEventType::NewOrRemoved).AddUObject(
 		this, &AArpgEnemy::StunTagChanged
@@ -70,5 +73,8 @@ void AArpgEnemy::InitAbilityActorInfo()
 	AbilitySystemComponent->InitAbilityActorInfo(this, this);
 	Cast<UArpgAbilitySystemComponent>(AbilitySystemComponent)->AbilityActorInfoSet();
 
-	InitializeDefaultAttributes();
+	if (HasAuthority())
+	{
+		InitializeDefaultAttributes();
+	}
 }
