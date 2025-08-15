@@ -35,6 +35,11 @@ void UArpgAttributeSet::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& Ou
 	DOREPLIFETIME_CONDITION_NOTIFY(UArpgAttributeSet, CastSpeed, COND_None, REPNOTIFY_Always);
 	DOREPLIFETIME_CONDITION_NOTIFY(UArpgAttributeSet, MaxLife, COND_None, REPNOTIFY_Always);
 	DOREPLIFETIME_CONDITION_NOTIFY(UArpgAttributeSet, MaxMana, COND_None, REPNOTIFY_Always);
+	DOREPLIFETIME_CONDITION_NOTIFY(UArpgAttributeSet, FireResistance, COND_None, REPNOTIFY_Always);
+	DOREPLIFETIME_CONDITION_NOTIFY(UArpgAttributeSet, LightningResistance, COND_None, REPNOTIFY_Always);
+	DOREPLIFETIME_CONDITION_NOTIFY(UArpgAttributeSet, ColdResistance, COND_None, REPNOTIFY_Always);
+	DOREPLIFETIME_CONDITION_NOTIFY(UArpgAttributeSet, NoxiousResistance, COND_None, REPNOTIFY_Always);
+	DOREPLIFETIME_CONDITION_NOTIFY(UArpgAttributeSet, AdditionalPhysicalDamageReduction, COND_None, REPNOTIFY_Always);
 	
 	DOREPLIFETIME_CONDITION_NOTIFY(UArpgAttributeSet, Life, COND_None, REPNOTIFY_Always);
 	DOREPLIFETIME_CONDITION_NOTIFY(UArpgAttributeSet, Mana, COND_None, REPNOTIFY_Always);
@@ -175,6 +180,32 @@ void UArpgAttributeSet::OnRep_Mana(const FGameplayAttributeData& OldMana) const
 void UArpgAttributeSet::OnRep_MaxMana(const FGameplayAttributeData& OldMaxMana) const
 {
 	GAMEPLAYATTRIBUTE_REPNOTIFY(UArpgAttributeSet, MaxMana, OldMaxMana)
+}
+
+void UArpgAttributeSet::OnRep_FireResistance(const FGameplayAttributeData& OldFireResistance) const
+{
+	GAMEPLAYATTRIBUTE_REPNOTIFY(UArpgAttributeSet, FireResistance, OldFireResistance)
+}
+
+void UArpgAttributeSet::OnRep_LightningResistance(const FGameplayAttributeData& OldLightningResistance) const
+{
+	GAMEPLAYATTRIBUTE_REPNOTIFY(UArpgAttributeSet, LightningResistance, OldLightningResistance)
+}
+
+void UArpgAttributeSet::OnRep_ColdResistance(const FGameplayAttributeData& OldColdResistance) const
+{
+	GAMEPLAYATTRIBUTE_REPNOTIFY(UArpgAttributeSet, ColdResistance, OldColdResistance)
+}
+
+void UArpgAttributeSet::OnRep_NoxiousResistance(const FGameplayAttributeData& OldNoxiousResistance) const
+{
+	GAMEPLAYATTRIBUTE_REPNOTIFY(UArpgAttributeSet, NoxiousResistance, OldNoxiousResistance)
+}
+
+void UArpgAttributeSet::OnRep_AdditionalPhysicalDamageReduction(
+	const FGameplayAttributeData& OldAdditionalPhysicalDamageReduction) const
+{
+	GAMEPLAYATTRIBUTE_REPNOTIFY(UArpgAttributeSet, AdditionalPhysicalDamageReduction, OldAdditionalPhysicalDamageReduction)
 }
 
 void UArpgAttributeSet::OnRep_Armor(const FGameplayAttributeData& OldArmor) const

@@ -143,6 +143,26 @@ public:
 	UPROPERTY(BlueprintReadOnly, ReplicatedUsing=OnRep_MaxLife, Category="Secondary Attributes")
 	FGameplayAttributeData MaxLife;
 	ATTRIBUTE_ACCESSORS(UArpgAttributeSet, MaxLife);
+
+	UPROPERTY(BlueprintReadOnly, ReplicatedUsing=OnRep_FireResistance, Category="Secondary Attributes")
+	FGameplayAttributeData FireResistance;
+	ATTRIBUTE_ACCESSORS(UArpgAttributeSet, FireResistance);
+
+	UPROPERTY(BlueprintReadOnly, ReplicatedUsing=OnRep_LightningResistance, Category="Secondary Attributes")
+	FGameplayAttributeData LightningResistance;
+	ATTRIBUTE_ACCESSORS(UArpgAttributeSet, LightningResistance);
+
+	UPROPERTY(BlueprintReadOnly, ReplicatedUsing=OnRep_ColdResistance, Category="Secondary Attributes")
+	FGameplayAttributeData ColdResistance;
+	ATTRIBUTE_ACCESSORS(UArpgAttributeSet, ColdResistance);
+
+	UPROPERTY(BlueprintReadOnly, ReplicatedUsing=OnRep_NoxiousResistance, Category="Secondary Attributes")
+	FGameplayAttributeData NoxiousResistance;
+	ATTRIBUTE_ACCESSORS(UArpgAttributeSet, NoxiousResistance);
+
+	UPROPERTY(BlueprintReadOnly, ReplicatedUsing=OnRep_AdditionalPhysicalDamageReduction, Category="Secondary Attributes")
+	FGameplayAttributeData AdditionalPhysicalDamageReduction;
+	ATTRIBUTE_ACCESSORS(UArpgAttributeSet, AdditionalPhysicalDamageReduction);
 	
 	UFUNCTION()
 	void OnRep_Armor(const FGameplayAttributeData& OldArmor) const;
@@ -172,7 +192,16 @@ public:
 	void OnRep_MaxLife(const FGameplayAttributeData& OldMaxLife) const;
 	UFUNCTION()
 	void OnRep_MaxMana(const FGameplayAttributeData& OldMaxMana) const;
-	
+	UFUNCTION()
+	void OnRep_FireResistance(const FGameplayAttributeData& OldFireResistance) const;
+	UFUNCTION()
+	void OnRep_LightningResistance(const FGameplayAttributeData& OldLightningResistance) const;
+	UFUNCTION()
+	void OnRep_ColdResistance(const FGameplayAttributeData& OldColdResistance) const;
+	UFUNCTION()
+	void OnRep_NoxiousResistance(const FGameplayAttributeData& OldNoxiousResistance) const;
+	UFUNCTION()
+	void OnRep_AdditionalPhysicalDamageReduction(const FGameplayAttributeData& OldAdditionalPhysicalDamageReduction) const;
 	/*
 	 *Secondary Attributes End
 	*/
