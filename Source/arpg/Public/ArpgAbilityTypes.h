@@ -19,13 +19,41 @@ public:
 	{
 		return FGameplayEffectContext::StaticStruct();
 	}
+	/** Creates a copy of this context, used to duplicate for later modifications */
+	virtual FArpgGameplayEffectContext* Duplicate() const
+	{
+		FArpgGameplayEffectContext* NewContext = new FArpgGameplayEffectContext();
+		*NewContext = *this;
+		if (GetHitResult())
+		{
+			// Does a deep copy of the hit result
+			NewContext->AddHitResult(*GetHitResult(), true);
+		}
+		return NewContext;
+	}
 
 	/** Custom serialization, subclasses must override this */
 	virtual bool NetSerialize(FArchive& Ar, class UPackageMap* Map, bool& bOutSuccess);
+
 protected:
 	UPROPERTY()
 	bool bIsBlockedHit = false;
 	
 	UPROPERTY()
 	bool bIsCriticalHit = false;
+};
+
+/*
+ * structopstypetraits define what the struct in this context the FArpgGameplayEffectContext is able to do
+ * more accurately it tells Unreals reflection system what operations are supported for this struct
+ */
+
+template<>
+struct TStructOpsTypeTraits<FArpgGameplayEffectContext> : TStructOpsTypeTraitsBase2<FArpgGameplayEffectContext>
+{
+	enum
+	{
+		WithNetSerializer = true,
+		WithCopy = true
+	};
 };
