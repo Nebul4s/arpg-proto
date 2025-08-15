@@ -3,7 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "AbilitySystem/Abilities/ArpgGameplayAbility.h"
+#include "AbilitySystem/Abilities/ArpgDamageGameplayAbility.h"
 #include "ArpgProjectileSpell.generated.h"
 
 class AArpgProjectile;
@@ -11,7 +11,7 @@ class AArpgProjectile;
  * 
  */
 UCLASS()
-class ARPG_API UArpgProjectileSpell : public UArpgGameplayAbility
+class ARPG_API UArpgProjectileSpell : public UArpgDamageGameplayAbility
 {
 	GENERATED_BODY()
 
@@ -24,6 +24,5 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 	TSubclassOf<AArpgProjectile> ProjectileClass;
 
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
-	TSubclassOf<UGameplayEffect> DamageEffectClass;
+
 };

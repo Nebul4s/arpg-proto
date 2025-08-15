@@ -4,7 +4,9 @@
 #include "AbilitySystem/ExecCalc/ExecCalc_Damage.h"
 #include "GameFramework/Actor.h"
 #include "AbilitySystemComponent.h"
+#include "ArpgAbilityTypes.h"
 #include "ArpgGameplayTags.h"
+#include "AbilitySystem/ArpgAbilitySystemLibrary.h"
 #include "AbilitySystem/ArpgAttributeSet.h"
 
 struct ArpgDamageStatics
@@ -55,14 +57,22 @@ void UExecCalc_Damage::Execute_Implementation(const FGameplayEffectCustomExecuti
 	EvaluateParams.TargetTags = TargetTags;
 
 	//Get damage set by caller mag
-	float Damage = Spec.GetSetByCallerMagnitude(FArpgGameplayTags::Get().Damage);
-
+	float Damage = 0.f;
+	for (FGameplayTag DamageTypeTag : FArpgGameplayTags::Get().DamageTypes)
+	{
+		const float DamageTypeValue = Spec.GetSetByCallerMagnitude(DamageTypeTag);
+		Damage += DamageTypeValue;
+	}
+	
 	//blockchance, if block prevent damage
 	float TargetBlockChance = 0;
 	ExecutionParams.AttemptCalculateCapturedAttributeMagnitude(GetArpgDamageStatics().BlockChanceDef, EvaluateParams, TargetBlockChance);
 	TargetBlockChance = FMath::Max<float>(TargetBlockChance, 0.f);
-
 	const bool bBlocked = FMath::RandRange(1, 100) < TargetBlockChance;
+
+	FGameplayEffectContextHandle EffectContextHandle = Spec.GetContext();
+	UArpgAbilitySystemLibrary::SetIsBlockedHit(EffectContextHandle, bBlocked);
+	
 	if (bBlocked) Damage = 0.f;
 
 	//armor
@@ -80,6 +90,8 @@ void UExecCalc_Damage::Execute_Implementation(const FGameplayEffectCustomExecuti
 	SourceCriticalHitMultiplier = FMath::Max<float>(SourceCriticalHitMultiplier, 0.f);
 
 	const bool bIsCriticalHit = FMath::RandRange(1, 100) < SourceCriticalHitChance;
+	UArpgAbilitySystemLibrary::SetIsCriticalHit(EffectContextHandle, bIsCriticalHit);
+	
 	if (bIsCriticalHit) Damage *= SourceCriticalHitMultiplier / 100.f;
 	
 	const FGameplayModifierEvaluatedData EvaluatedData(UArpgAttributeSet::GetIncomingDamageAttribute(), EGameplayModOp::Additive, Damage);

@@ -54,12 +54,13 @@ void UArpgProjectileSpell::SpawnProjectile(const FVector& ProjectileTargetLocati
 		EffectContextHandle.AddHitResult(HitResult);
 		
 		const FGameplayEffectSpecHandle SpecHandle = SourceASC->MakeOutgoingSpec(DamageEffectClass, GetAbilityLevel(),EffectContextHandle);
-
-		//scaleable damage by abilitylevel, use curves to determine damage later
-		const float ScaledDamage = Damage.GetValueAtLevel(GetAbilityLevel());
-		
 		const FArpgGameplayTags GameplayTags = FArpgGameplayTags::Get();
-		UAbilitySystemBlueprintLibrary::AssignTagSetByCallerMagnitude(SpecHandle, GameplayTags.Damage, ScaledDamage);
+
+		for (auto& Pair : DamageTypes)
+		{
+			const float ScaledDamage = Pair.Value.GetValueAtLevel(GetAbilityLevel());
+			UAbilitySystemBlueprintLibrary::AssignTagSetByCallerMagnitude(SpecHandle, Pair.Key, ScaledDamage);
+		}
 		
 		ProjectileToSpawn->DamageEffectSpecHandle = SpecHandle;
 		

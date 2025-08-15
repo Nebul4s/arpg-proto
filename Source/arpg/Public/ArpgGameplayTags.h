@@ -43,6 +43,10 @@ public:
 	FGameplayTag InputTag_4;
 
 	FGameplayTag Damage;
+	FGameplayTag Damage_Fire;
+
+	TArray<FGameplayTag> DamageTypes;
+	
 	FGameplayTag Stun;
 private:
 	static FArpgGameplayTags GameplayTags;
