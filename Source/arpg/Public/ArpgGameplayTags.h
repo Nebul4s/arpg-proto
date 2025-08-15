@@ -39,7 +39,7 @@ public:
 	FGameplayTag Attributes_Resistance_Lightning;
 	FGameplayTag Attributes_Resistance_Cold;
 	FGameplayTag Attributes_Resistance_Noxious;
-	FGameplayTag Attributes_Resistance_AdditionalPhysical;
+	FGameplayTag Attributes_Resistance_AdditionalPhysicalDamageReduction;
 
 	FGameplayTag InputTag_LMB;
 	FGameplayTag InputTag_RMB;

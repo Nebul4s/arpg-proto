@@ -54,7 +54,7 @@ void FArpgGameplayTags::InitializeNativeGameplayTags()
 	GameplayTags.Attributes_Resistance_Lightning = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("Attributes.Resistance.Lightning"));
 	GameplayTags.Attributes_Resistance_Cold = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("Attributes.Resistance.Cold"));
 	GameplayTags.Attributes_Resistance_Noxious = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("Attributes.Resistance.Noxious"));
-	GameplayTags.Attributes_Resistance_AdditionalPhysical = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("Attributes.Resistance.AdditionalPhysical"));
+	GameplayTags.Attributes_Resistance_AdditionalPhysicalDamageReduction = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("Attributes.Resistance.AdditionalPhysicalDamageReduction"));
 
 	/*
 	 * map of damage types to res
@@ -64,7 +64,7 @@ void FArpgGameplayTags::InitializeNativeGameplayTags()
 	GameplayTags.DamageTypesToResistances.Add(GameplayTags.Damage_Lightning, GameplayTags.Attributes_Resistance_Lightning);
 	GameplayTags.DamageTypesToResistances.Add(GameplayTags.Damage_Cold, GameplayTags.Attributes_Resistance_Cold);
 	GameplayTags.DamageTypesToResistances.Add(GameplayTags.Damage_Noxious, GameplayTags.Attributes_Resistance_Noxious);
-	GameplayTags.DamageTypesToResistances.Add(GameplayTags.Damage_Physical, GameplayTags.Attributes_Resistance_AdditionalPhysical);
+	GameplayTags.DamageTypesToResistances.Add(GameplayTags.Damage_Physical, GameplayTags.Attributes_Resistance_AdditionalPhysicalDamageReduction);
 
 	/*
 	 * effects
