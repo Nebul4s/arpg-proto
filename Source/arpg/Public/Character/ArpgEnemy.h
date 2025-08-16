@@ -7,6 +7,9 @@
 #include "Interaction/EnemyInterface.h"
 #include "ArpgEnemy.generated.h"
 
+class UBehaviorTree;
+class AArpgAIController;
+
 /**
  * 
  */
@@ -16,7 +19,7 @@ class ARPG_API AArpgEnemy : public AArpgCharacterBase, public IEnemyInterface
 	GENERATED_BODY()
 public:
 	AArpgEnemy();
-
+	virtual void PossessedBy(AController* NewController) override;
 	/*
 	 *Enemy interface
 	 */
@@ -51,5 +54,10 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="Character class defaults")
 	int32 Level = 1;
 
+	UPROPERTY(EditAnywhere, Category="AI")
+	TObjectPtr<UBehaviorTree> BehaviorTree;
+
+	UPROPERTY()
+	TObjectPtr<AArpgAIController> ArpgAIController;
 	
 };
