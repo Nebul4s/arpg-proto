@@ -39,6 +39,8 @@ void AArpgEnemy::PossessedBy(AController* NewController)
 
 	ArpgAIController->GetBlackboardComponent()->InitializeBlackboard(*BehaviorTree->BlackboardAsset);
 	ArpgAIController->RunBehaviorTree(BehaviorTree);
+
+	ArpgAIController->GetBlackboardComponent()->SetValueAsBool(FName("IsStunned"), false);
 }
 
 void AArpgEnemy::HighlightActor()
@@ -85,6 +87,7 @@ void AArpgEnemy::StunTagChanged(const FGameplayTag CallbackTag, int32 NewCount)
 {
 	bIsStunned = NewCount > 0;
 	GetCharacterMovement()->MaxWalkSpeed = bIsStunned ? 0.f : MaxWalkSpeed;
+	ArpgAIController->GetBlackboardComponent()->SetValueAsBool(FName("IsStunned"), bIsStunned);
 }
 
 void AArpgEnemy::InitAbilityActorInfo()

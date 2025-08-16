@@ -13,7 +13,8 @@ UENUM(BlueprintType)
 enum class ECharacterClass : uint8
 {
 	//subject to change
-	Witch
+	Witch,
+	Boss
 };
 
 USTRUCT(BlueprintType)
