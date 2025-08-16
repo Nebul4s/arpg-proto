@@ -59,5 +59,4 @@ protected:
 
 	UPROPERTY()
 	TObjectPtr<AArpgAIController> ArpgAIController;
-	
 };
