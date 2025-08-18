@@ -50,6 +50,7 @@ void AArpgCharacterBase::MulticastHandleDeath_Implementation()
 	GetMesh()->SetCollisionResponseToChannel(ECC_WorldStatic, ECR_Block);
 	
 	GetCapsuleComponent()->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+	bIsDead = true;
 }
 
 void AArpgCharacterBase::BeginPlay()
@@ -59,10 +60,20 @@ void AArpgCharacterBase::BeginPlay()
 	
 }
 
-FVector AArpgCharacterBase::GetCombatSocketLocation()
+FVector AArpgCharacterBase::GetCombatSocketLocation_Implementation()
 {
 	check(Weapon);
 	return Weapon->GetSocketLocation(WeaponTipSocketName);
+}
+
+bool AArpgCharacterBase::IsDead_Implementation() const
+{
+	return bIsDead;
+}
+
+AActor* AArpgCharacterBase::GetAvatar_Implementation()
+{
+	return this;
 }
 
 void AArpgCharacterBase::InitAbilityActorInfo()

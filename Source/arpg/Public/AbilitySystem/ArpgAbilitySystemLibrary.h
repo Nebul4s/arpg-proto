@@ -31,4 +31,9 @@ public:
 	
 	UFUNCTION(BlueprintCallable, Category="AbilitySystemBlueprintLibrary|GameplayEffects")
 	static void SetIsCriticalHit(UPARAM(ref) FGameplayEffectContextHandle& EffectContextHandle, bool bIsCriticalHit);
+
+	UFUNCTION(BlueprintCallable, Category="AbilitySystemBlueprintLibrary|GameplayMechanics")
+	static void GetLivePlayersWithinRadius(const UObject* WorldContextObject, TArray<AActor*>& OutOverlappingActors, const TArray<AActor*>& ActorsToIgnore, float Radius, const FVector& SphereOrigin);
 };
+
+
