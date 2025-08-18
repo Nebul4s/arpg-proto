@@ -72,5 +72,14 @@ void FArpgGameplayTags::InitializeNativeGameplayTags()
 	
 	GameplayTags.Stun = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("Stun"));
 
+	/*
+	 * abilities
+	 */
 	GameplayTags.Abilities_Attack = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("Abilities.Attack"));
+
+	/*
+	 * montage
+	 */
+	GameplayTags.Montage_Attack_Weapon = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("Montage.Attack.Weapon"));
+	GameplayTags.Montage_Attack_RightHand = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("Montage.Attack.RightHand"));
 }

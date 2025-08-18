@@ -56,6 +56,9 @@ public:
 	FGameplayTag Damage_Noxious;
 
 	FGameplayTag Abilities_Attack;
+
+	FGameplayTag Montage_Attack_Weapon;
+	FGameplayTag Montage_Attack_RightHand;
 	
 	TMap<FGameplayTag, FGameplayTag> DamageTypesToResistances;
 	
