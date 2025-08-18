@@ -75,7 +75,7 @@ void AArpgEnemy::BeginPlay()
 	InitAbilityActorInfo();
 	if (HasAuthority())
 	{
-		UArpgAbilitySystemLibrary::GiveStartupAbilities(this, AbilitySystemComponent);
+		UArpgAbilitySystemLibrary::GiveStartupAbilities(this, AbilitySystemComponent, CharacterClass);
 	}
 	
 	AbilitySystemComponent->RegisterGameplayTagEvent(FArpgGameplayTags::Get().Stun, EGameplayTagEventType::NewOrRemoved).AddUObject(

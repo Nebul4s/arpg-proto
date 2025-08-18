@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "AbilitySystem/Data/CharacterClassInfo.h"
 #include "Character/ArpgCharacterBase.h"
 #include "Interaction/EnemyInterface.h"
 #include "ArpgEnemy.generated.h"
@@ -54,6 +55,9 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="Character class defaults")
 	int32 Level = 1;
 
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="Character class defaults")
+	ECharacterClass CharacterClass = ECharacterClass::Boss;
+	
 	UPROPERTY(EditAnywhere, Category="AI")
 	TObjectPtr<UBehaviorTree> BehaviorTree;
 

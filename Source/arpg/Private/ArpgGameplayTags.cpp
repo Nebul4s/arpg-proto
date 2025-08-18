@@ -72,5 +72,5 @@ void FArpgGameplayTags::InitializeNativeGameplayTags()
 	
 	GameplayTags.Stun = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("Stun"));
 
-	
+	GameplayTags.Abilities_Attack = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("Abilities.Attack"));
 }
