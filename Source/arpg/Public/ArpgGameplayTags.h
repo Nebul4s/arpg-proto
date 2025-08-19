@@ -56,6 +56,7 @@ public:
 	FGameplayTag Damage_Noxious;
 
 	FGameplayTag Abilities_Attack;
+	FGameplayTag Abilities_RangedAttack;
 
 	FGameplayTag Montage_Attack_Weapon;
 	FGameplayTag Montage_Attack_LeftHand;

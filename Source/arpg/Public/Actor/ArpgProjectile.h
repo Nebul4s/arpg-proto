@@ -18,6 +18,7 @@ class ARPG_API AArpgProjectile : public AActor
 	
 public:	
 	AArpgProjectile();
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 	TObjectPtr<UProjectileMovementComponent> ProjectileMovementComponent;
 
 	UPROPERTY(VisibleAnywhere)

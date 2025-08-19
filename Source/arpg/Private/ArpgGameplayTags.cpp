@@ -76,6 +76,7 @@ void FArpgGameplayTags::InitializeNativeGameplayTags()
 	 * abilities
 	 */
 	GameplayTags.Abilities_Attack = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("Abilities.Attack"));
+	GameplayTags.Abilities_RangedAttack = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("Abilities.RangedAttack"));
 
 	/*
 	 * montage
